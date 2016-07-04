@@ -48,11 +48,13 @@ import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
+import com.google.api.services.vision.v1.model.ImageContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -212,6 +214,10 @@ public class MainActivity extends AppCompatActivity {
                             labelDetection.setMaxResults(10);
                             add(labelDetection);
                         }});
+
+                        ImageContext imgContext = new ImageContext();
+                        imgContext.setLanguageHints(Arrays.asList("id"));
+                        annotateImageRequest.setImageContext(imgContext);
 
                         // Add the list of one thing to the request
                         add(annotateImageRequest);
