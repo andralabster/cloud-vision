@@ -56,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String CLOUD_VISION_API_KEY = "e374a210e352dfd4da0563f70538cf5ff4cf1c23";
+    private static final String CLOUD_VISION_API_KEY = "AIzaSyD99eR5Dos8TaGx9qWCnMCk9T3TYyprORQ";
     public static final String FILE_NAME = "temp.jpg";
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                         // add the features we want
                         annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                             Feature labelDetection = new Feature();
-                            labelDetection.setType("LABEL_DETECTION");
+                            labelDetection.setType("TEXT_DETECTION");
                             labelDetection.setMaxResults(10);
                             add(labelDetection);
                         }});
@@ -227,12 +227,10 @@ public class MainActivity extends AppCompatActivity {
                     return convertResponseToString(response);
 
                 } catch (GoogleJsonResponseException e) {
-                    Log.d(TAG, "failed to make API request because " + e.getContent());
+                    return "failed to make API request because " + e.getContent();
                 } catch (IOException e) {
-                    Log.d(TAG, "failed to make API request because of other IOException " +
-                            e.getMessage());
+                    return "failed to make API request because of other IOException " + e.getMessage();
                 }
-                return "Cloud Vision API request failed. Check logs for details.";
             }
 
             protected void onPostExecute(String result) {
